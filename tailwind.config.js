@@ -10,6 +10,9 @@ module.exports = {
         montserrat: ['Montserrat', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
     },
+    spacing: {
+      '-10': '-2.5rem',
+    }
     },
   },
   plugins: [],

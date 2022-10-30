@@ -1,0 +1,10 @@
+
+const trendingSection = document.getElementById('trendingSection')
+const heroMovieImg = document.getElementById('heroMovieImg')
+const heroMovieTitle = document.getElementById('heroMovieTitle')
+const heroMovieScore = document.getElementById('heroMovieScore')
+const categorySection = document.getElementById('categorySection')
+const searchInputContainer = document.getElementById('searchInputContainer')
+const shortCategories = document.getElementById('shortCategories')
+const trendingSectionTitle = document.getElementById('trendingSectionTitle')
+const searchButton = document.getElementById('searchButton')

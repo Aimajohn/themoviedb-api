@@ -10,38 +10,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../src/imgs/icon-just-books.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body class="bg-darkblue font-montserrat">
     <header class="absolute z-10 flex flex-row p-1">
         <div class="w-56">
-            <img class="object-fit" src="../src/imgs/logo2.png" alt="The Moovies Logo">
+            <img  class="object-fit" src="../src/imgs/logo2.png" alt="The Moovies Logo">
         </div>
         <span>Profile</span>
     </header>
-    <div class="relative bg-darkblue w-full h-96" >
-        <div class="overflow-hidden w-full h-96  before:w-full before:h-full before:absolute before:top-0 before:right-0 before:bg-gradient-to-b before:from-transparent before:to-darkblue before:opacity-90">
-            <img src="../src/imgs/blackAdam.jpg" class="object-cover w-full" alt="Peliculas"  >
+    <section id="heroContainer">
+        <div class="relative bg-darkblue w-full h-96" >
+            <div class="overflow-hidden w-full h-96  before:w-full before:h-full before:absolute before:top-0 before:right-0 before:bg-gradient-to-b before:from-transparent before:to-darkblue before:opacity-90">
+                <img id="heroMovieImg" src="../src/imgs/blackAdam.jpg" class="object-cover w-full" alt="Peliculas"  >
+            </div>
+            <div class="absolute flex flex-col sm:flex-row sm:justify-between sm:bottom-6 w-full bottom-2 px-4">
+                <h3 id="heroMovieTitle" class=" font-poppins text-gray-200 font-semibold text-2xl" >
+                    Black Adam
+                </h3>        
+                <span class="imbdSpan" id="heroMovieScore">IMBD No</span>
+            </div>
         </div>
-        <div class="absolute flex flex-col sm:flex-row sm:justify-between sm:bottom-6 w-full bottom-2 px-4">
-            <h3 class=" font-poppins text-gray-200 font-semibold text-2xl" >
-                Black Adam
-            </h3>        
-            <span class="imbdSpan">IMBD 9.8</span>
+        <div class="flex flex-col" >
+            <div id="searchInputContainer" class="relative w-11/12 my-3 h-10 border-solid border-slate-800 rounded-md border-2 m-auto outline-transparent focus-visible:outline-transparent text-gray-300">
+                <input type="text" class="w-full h-full bg-transparent pl-2 outline-slate-600 shadow-black-500 shadow-sm " placeholder="Search...">
+                <button id="searchButton" type="button" class="absolute right-0 w-12 h-10 -mt-px leading-10 material-symbols-rounded">search</button>
+            </div>
+            <div id="shortCategories" class="categories px-4 flex flex-row overflow-y-scroll overflow-x-visible  h-16">
+                <button type="button" class="categoryButton">All</button>
+                <button type="button" class="categoryButton">Action</button>
+                <button type="button" class="categoryButton">Comedy</button>
+                <button type="button" class="categoryButton">Fantastic</button>
+                <button type="button" class="categoryButton">Fantastic</button>
+            </div>
+            <div id="movieDescription" class="p-5">
+                <h3 class="text-gray-100 font-poppins font-semibold text-xl my-3">Movie Story:</h3>
+                <p class="text-gray-200 ">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita iste voluptate cupiditate. Ipsam libero nobis rem temporibus repudiandae commodi officiis accusantium. Ut non quo eaque dignissimos, qui expedita a facilis!
+                    Error doloremque maiores rerum eos inventore!...
+                </p>
+            </div>
         </div>
-        <div class=" absolute">...</div>
+
+    </section>
     </div>
     <main>
-        <div class="w-11/12 mt-3 h-10 border-solid border-slate-800 rounded-md border-2 m-auto outline-transparent focus-visible:outline-transparent">
-            <input type="text" class="w-full h-full bg-transparent pl-2 outline-slate-600 shadow-black-500 shadow-sm " placeholder="Search...">
-        </div>
-        <div class="categories px-2 flex flex-row overflow-y-scroll overflow-x-visible mt-4 h-16">
-            <button type="button" class="categoryButton">All</button>
-            <button type="button" class="categoryButton">Action</button>
-            <button type="button" class="categoryButton">Comedy</button>
-            <button type="button" class="categoryButton">Fantastic</button>
-        </div>
+
         <section class="mt-6 ">
-            <h2 class="text-white font-poppins font-semibold text-lg p-4">Trending Now</h2>
+            <h2 id="trendingSectionTitle" class="text-white font-poppins font-semibold text-lg px-4">Trending Now</h2>
             <div class="flex flex-row overflow-x-scroll" id="trendingSection">
                 <!-- <article class="movieContainer ">
                     <div class="imgRandomMovieContainer " >
@@ -61,10 +77,21 @@
 
         </section>
     </main>
-    <footer class="w-full mt-10 h-10 bg-yellow-500 font-poppins flex items-center font-semibold p-3">
+    <footer class="w-full mt-10 h-10 bg-yellow-500 font-poppins flex items-center font-semibold p-4">
         Hecho con ❤️ por John
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="module" src="../src/index.js"></script>
+    <style>
+        .material-symbols-rounded {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 48
+        }
+        </style>
+    <script  src="../src/nodes.js"></script>
+    <script  src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script  src="../src/index.js"></script>
+    <script  src="../src/navigator.js"></script>
 </body>
 </html>
