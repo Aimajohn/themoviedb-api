@@ -5,30 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Moovies</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../public/css/tailwind.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../src/imgs/icon-just-books.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body class="bg-darkblue font-montserrat">
-    <header class="absolute z-10 flex flex-row p-1">
-        <div class="w-56">
+<body class="bg-darkblue font-montserrat min-h-screen relative">
+    <header class="absolute z-10 h-28 flex flex-row p-2 justify-center items-center w-full font-poppins text-xl font-semibold text-gray-100">
+        <button id="backButton" type="button" class="p-5 material-symbols-rounded text-gray-100 absolute z-20 left-4">
+            arrow_back_ios_new
+            </button>
+        <div id="pageLogo" class="w-56">
             <img  class="object-fit" src="../src/imgs/logo2.png" alt="The Moovies Logo">
         </div>
-        <span>Profile</span>
+        <div id="searchPageTitle" class="flex items-center flex-col ">
+            <h2 >Results</h2>
+            <span class="text-sm text-gray-400 font-montserrat" id="searchInputText">for "Avengers"</span>
+        </div>
+
+        <button id="tuneButton" type="button" class="p-5 material-symbols-rounded text-gray-100 right-4 absolute z-20">
+            tune
+            </button>
     </header>
     <section id="heroContainer">
-        <div class="relative bg-darkblue w-full h-96" >
-            <div class="overflow-hidden w-full h-96  before:w-full before:h-full before:absolute before:top-0 before:right-0 before:bg-gradient-to-b before:from-transparent before:to-darkblue before:opacity-90">
+        <div id="heroPoster" class="relative bg-darkblue w-full h-500" >
+            <div class="overflow-hidden w-full h-500  before:w-full before:h-full before:absolute before:top-0 before:right-0 before:bg-gradient-to-b before:from-transparent before:to-darkblue before:opacity-90">
                 <img id="heroMovieImg" src="../src/imgs/blackAdam.jpg" class="object-cover w-full" alt="Peliculas"  >
             </div>
             <div class="absolute flex flex-col sm:flex-row sm:justify-between sm:bottom-6 w-full bottom-2 px-4">
                 <h3 id="heroMovieTitle" class=" font-poppins text-gray-200 font-semibold text-2xl" >
                     Black Adam
                 </h3>        
-                <span class="imbdSpan" id="heroMovieScore">IMBD No</span>
+                <span class="imbdSpan spanSquare" id="heroMovieScore">IMBD No</span>
             </div>
         </div>
         <div class="flex flex-col" >
@@ -54,11 +64,11 @@
 
     </section>
     </div>
-    <main>
-
-        <section class="mt-6 ">
-            <h2 id="trendingSectionTitle" class="text-white font-poppins font-semibold text-lg px-4">Trending Now</h2>
-            <div class="flex flex-row overflow-x-scroll" id="trendingSection">
+    <main class="pb-20">
+        <section id="trendingSection" class="mt-6 relative">
+            <h2 id="trendingSectionTitle" class="text-white font-poppins font-semibold text-2xl px-5">Trending Now</h2>
+            <a id="verMasTrends" href="#trends=" class="text-gray-200 absolute right-5 top-0 bg-gray-800 py-1 px-3 rounded-lg text-sm">ver más...</a>
+            <div class="flex flex-row overflow-x-scroll p-4" id="trendingMoviesContainer">
                 <!-- <article class="movieContainer ">
                     <div class="imgRandomMovieContainer " >
                         <img src="../src/imgs/Fall.jpg" alt="" >
@@ -74,19 +84,35 @@
             </div>
         </section>
         <section id="categorySection" class="p-5 flex flex-wrap ">
-
+        </section>
+        <section id="searchResultsSection" class="p-5 flex flex-wrap flex-col items-center">
+            <article class="border-solid border-gray-800 border-2 w-full bg-darkblue2 rounded-lg overflow-hidden h-44 flex flex-row">
+                <div class="imgResultContainer w-2/5 ">
+                    <img src="https://image.tmdb.org/t/p/w342/hYqOjJ7Gh1fbqXrxlIao1g8ZehF.jpg" alt="result movie picture" >
+                </div>
+                <div class="descriptionResultContainer flex flex-col items-start px-2 py-3">
+                    <h4 class="tituloRandomMovie text-left text-gray-200">Avengers: Endgame</h4>
+                    <span class="genresOf font-montserrat text-sm my-2 text-gray-200">Action, Adventure, Drama</span>
+                    <div class="featuresOfResult flex flex-row flex-wrap">
+                        <span class="spanSquare imbdSpan spanSquare m-1 bg-gray-800 text-gray-300 font-normal">IMBD 8.4</span>
+                        <span class="featureOfResult spanSquare m-1 bg-gray-800 text-gray-300 font-normal">2019</span>
+                        <span class="featureOfResult m-1 spanSquare bg-gray-800 text-gray-300 font-normal">13+</span>
+                        <span class="featureOfResult  m-1 spanSquare  bg-gray-800 text-gray-300 font-normal">ES</span>
+                    </div>
+                </div>
+            </article>     
         </section>
     </main>
-    <footer class="w-full mt-10 h-10 bg-yellow-500 font-poppins flex items-center font-semibold p-4">
+    <footer class=" absolute bottom-0 w-full h-16 bg-yellow-500 font-poppins flex items-center font-semibold p-4">
         Hecho con ❤️ por John
     </footer>
     <style>
         .material-symbols-rounded {
           font-variation-settings:
           'FILL' 0,
-          'wght' 400,
+          'wght' 600,
           'GRAD' 0,
-          'opsz' 48
+          'opsz' 90
         }
         </style>
     <script  src="../src/nodes.js"></script>

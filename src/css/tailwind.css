@@ -17,14 +17,19 @@
         @apply relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95
     }
     .movieContainer{
-        @apply relative w-48 m-5 rounded-md overflow-hidden flex-shrink-0
+        @apply relative  my-5 mx-2 rounded-md overflow-hidden flex-grow;
+        flex-basis: 150px;
+        min-width: 150px;
+    }
+    .spanSquare{
+        @apply h-7  my-2 px-2 py-1 rounded-md text-sm font-poppins font-bold
+    }
     }
     .imbdSpan{
-        @apply  h-7 w-20 my-2 px-2 py-1 text-gray-900 font-poppins font-bold bg-yellow-400 rounded-md text-sm
+        @apply text-gray-900 w-20 bg-yellow-400 
     }
     .movieHeader{
         @apply absolute flex flex-col bottom-2 right-3 items-end 
     }
-}
 @layer utilities {
 }

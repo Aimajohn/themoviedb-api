@@ -8,6 +8,7 @@ const api = axios.create({
 
 
 
+backButton.addEventListener('click', goBack)
 searchButton.addEventListener('click', searchMovie)
 
 function redondear(numero){
@@ -39,6 +40,7 @@ async function getTrendings(){
         movieHeader.classList.add('movieHeader')
         tituloRandomMovie.classList.add('tituloRandomMovie')
         imbdSpan.classList.add('imbdSpan')
+        imbdSpan.classList.add('spanSquare')
 
         imgRandomMovieContainer.append(movieImg)
         movieHeader.append(tituloRandomMovie,imbdSpan)
@@ -50,7 +52,7 @@ async function getTrendings(){
 
         randomMovies.push(movieContainer)
     });
-    trendingSection.append(...randomMovies)
+    trendingMoviesContainer.append(...randomMovies)
 }
 
 async function getCategories(){
@@ -69,4 +71,9 @@ async function getCategories(){
 
 function searchMovie(){
     location.hash = '#search='
+}
+
+function goBack(){
+    location.hash = '#home'
+
 }

@@ -4,17 +4,18 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        'darkblue': '#000d21'
+        'darkblue': '#000d21',
+        'darkblue2': '#00061D'
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
+      },
+      spacing: {
+        '500': '30rem',
+      }
     },
-    spacing: {
-      '-10': '-2.5rem',
-    }
-    },
-  },
-  plugins: [],
+    plugins: [],
   // purge: ["./src/**/*.{js,jsx,ts,tsx}"],
+  }
 }
