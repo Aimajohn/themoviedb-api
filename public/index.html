@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Moovies</title>
+    <link rel="stylesheet" href="../public/css/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../src/imgs/icon-just-books.png" type="image/x-icon">
+</head>
+<body class="bg-darkblue font-montserrat">
+    <header class="absolute z-10 flex flex-row p-1">
+        <div class="w-56">
+            <img class="object-fit" src="../src/imgs/logo2.png" alt="The Moovies Logo">
+        </div>
+        <span>Profile</span>
+    </header>
+    <div class="relative bg-darkblue w-full h-96" >
+        <div class="overflow-hidden w-full h-96  before:w-full before:h-full before:absolute before:top-0 before:right-0 before:bg-gradient-to-b before:from-transparent before:to-darkblue before:opacity-90">
+            <img src="../src/imgs/blackAdam.jpg" class="object-cover w-full" alt="Peliculas"  >
+        </div>
+        <div class="absolute flex flex-col sm:flex-row sm:justify-between sm:bottom-6 w-full bottom-2 px-4">
+            <h3 class=" font-poppins text-gray-200 font-semibold text-2xl" >
+                Black Adam
+            </h3>        
+            <span class="imbdSpan">IMBD 9.8</span>
+        </div>
+        <div class=" absolute">...</div>
+    </div>
+    <main>
+        <div class="w-11/12 mt-3 h-10 border-solid border-slate-800 rounded-md border-2 m-auto outline-transparent focus-visible:outline-transparent">
+            <input type="text" class="w-full h-full bg-transparent pl-2 outline-slate-600 shadow-black-500 shadow-sm " placeholder="Search...">
+        </div>
+        <div class="categories px-2 flex flex-row overflow-y-scroll overflow-x-visible mt-4 h-16">
+            <button type="button" class="categoryButton">All</button>
+            <button type="button" class="categoryButton">Action</button>
+            <button type="button" class="categoryButton">Comedy</button>
+            <button type="button" class="categoryButton">Fantastic</button>
+        </div>
+        <section class="mt-6 ">
+            <h2 class="text-white font-poppins font-semibold text-lg p-4">Trending Now</h2>
+            <div class="flex flex-row overflow-x-scroll" id="trendingSection">
+                <!-- <article class="movieContainer ">
+                    <div class="imgRandomMovieContainer " >
+                        <img src="../src/imgs/Fall.jpg" alt="" >
+                    </div>
+                    <div class="absolute flex flex-col bottom-2 right-3">
+                        <h5 class="tituloRandomMovie ">
+                            Fall
+                        </h5>
+                        <button type="button" class="imbdButton px-2 py-1">IMBD 9.8</button>
+                    </div>
+                </article> -->
+                
+            </div>
+        </section>
+        <section id="categorySection" class="p-5 flex flex-wrap ">
+
+        </section>
+    </main>
+    <footer class="w-full mt-10 h-10 bg-yellow-500 font-poppins flex items-center font-semibold p-3">
+        Hecho con ❤️ por John
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="../src/index.js"></script>
+</body>
+</html>

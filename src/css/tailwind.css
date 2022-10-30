@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {}
+@layer components {
+    .btn-blue {
+        @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+    }
+    .categoryButton {
+        @apply mt-3 leading-10 h-10 border-solid border-gray-600 rounded-md border-2 text-gray-300 overscroll-x-contain bg-transparent px-3 outline-slate-500 outline-2 bg-gray-900 mx-1
+    }
+    .tituloRandomMovie{
+        @apply bottom-0 text-gray-200 font-poppins font-semibold text-xl text-right leading-5 
+    }
+    .imgRandomMovieContainer{
+        @apply relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95
+    }
+    .movieContainer{
+        @apply relative w-48 m-5 rounded-md overflow-hidden flex-shrink-0
+    }
+    .imbdSpan{
+        @apply  h-7 w-20 my-2 px-2 py-1 text-gray-900 font-poppins font-bold bg-yellow-400 rounded-md text-sm
+    }
+    .movieHeader{
+        @apply absolute flex flex-col bottom-2 right-3 items-end 
+    }
+}
+@layer utilities {
+}
