@@ -8,13 +8,13 @@
         @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
     }
     .categoryButton {
-        @apply mt-3 leading-10 h-10 border-solid border-gray-600 rounded-md border-2 text-gray-300 overscroll-x-contain bg-transparent px-3 outline-slate-500 outline-2 bg-gray-900 mx-1
+        @apply mt-3 leading-10 h-10 border-solid border-gray-600 rounded-md border-2 text-gray-300 overscroll-x-contain bg-transparent px-3 outline-slate-500 outline-2 bg-gray-900 mx-1;
     }
     .tituloRandomMovie{
         @apply bottom-0 text-gray-200 font-poppins font-semibold text-xl text-right leading-5 
     }
     .imgRandomMovieContainer{
-        @apply relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95
+        @apply  relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95;
     }
     .movieContainer{
         @apply relative  my-5 mx-2 rounded-md overflow-hidden flex-grow;
@@ -22,14 +22,36 @@
         min-width: 150px;
     }
     .spanSquare{
-        @apply h-7  my-2 px-2 py-1 rounded-md text-sm font-poppins font-bold
+        @apply h-7 mr-1 mt-1 px-2 py-1 rounded-md text-sm font-poppins font-normal bg-gray-800 text-gray-300
     }
-    }
+    
     .imbdSpan{
-        @apply text-gray-900 w-20 bg-yellow-400 
+        @apply text-gray-900 w-20 bg-yellow-400  font-bold my-2
     }
     .movieHeader{
         @apply absolute flex flex-col bottom-2 right-3 items-end 
     }
+    .searchResultArticle{
+        @apply border-solid border-gray-800 border-2 bg-darkblue2 rounded-lg overflow-hidden  flex flex-row basis-44 w-11/12 mb-3;
+        max-width: 500px;
+    }
+    .imgResultContainer{
+        @apply w-2/5 flex items-center h-full bg-black;
+        max-width: 145px;
+    }
+    .imgResult{
+        @apply min-h-full object-cover
+    }
+    .descriptionResultContainer{
+        @apply  flex flex-col items-start px-4 py-3
+    }
+    .searchResultSubtitle{
+        @apply font-montserrat text-sm my-2 text-gray-200
+    }
+    .featuresOfResult{
+        @apply flex flex-row flex-wrap
+    }
+}
+
 @layer utilities {
 }

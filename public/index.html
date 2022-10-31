@@ -42,16 +42,9 @@
             </div>
         </div>
         <div class="flex flex-col" >
-            <div id="searchInputContainer" class="relative w-11/12 my-3 h-10 border-solid border-slate-800 rounded-md border-2 m-auto outline-transparent focus-visible:outline-transparent text-gray-300">
-                <input type="text" class="w-full h-full bg-transparent pl-2 outline-slate-600 shadow-black-500 shadow-sm " placeholder="Search...">
+            <div id="searchInputContainer" class="outline-none relative w-11/12 my-3 h-10 border-solid border-slate-800 rounded-md border-2 m-auto outline-transparent focus-visible:outline-transparent text-gray-300">
+                <input id="searchInput" type="text" class="w-full h-full bg-transparent pl-2 outline-slate-600 shadow-black-500 shadow-sm " placeholder="Search...">
                 <button id="searchButton" type="button" class="absolute right-0 w-12 h-10 -mt-px leading-10 material-symbols-rounded">search</button>
-            </div>
-            <div id="shortCategories" class="categories px-4 flex flex-row overflow-y-scroll overflow-x-visible  h-16">
-                <button type="button" class="categoryButton">All</button>
-                <button type="button" class="categoryButton">Action</button>
-                <button type="button" class="categoryButton">Comedy</button>
-                <button type="button" class="categoryButton">Fantastic</button>
-                <button type="button" class="categoryButton">Fantastic</button>
             </div>
             <div id="movieDescription" class="p-5">
                 <h3 class="text-gray-100 font-poppins font-semibold text-xl my-3">Movie Story:</h3>
@@ -68,7 +61,7 @@
         <section id="trendingSection" class="mt-6 relative">
             <h2 id="trendingSectionTitle" class="text-white font-poppins font-semibold text-2xl px-5">Trending Now</h2>
             <a id="verMasTrends" href="#trends=" class="text-gray-200 absolute right-5 top-0 bg-gray-800 py-1 px-3 rounded-lg text-sm">ver más...</a>
-            <div class="flex flex-row overflow-x-scroll p-4" id="trendingMoviesContainer">
+            <div id="trendingMoviesContainer" class=" flex flex-row overflow-x-scroll p-4" >
                 <!-- <article class="movieContainer ">
                     <div class="imgRandomMovieContainer " >
                         <img src="../src/imgs/Fall.jpg" alt="" >
@@ -82,22 +75,24 @@
                 </article> -->
                 
             </div>
+            <div id="moviesByCategory" class="justify-evenly flex-wrap flex flex-row overflow-x-scroll p-4" >
+            </div>
         </section>
-        <section id="categorySection" class="p-5 flex flex-wrap ">
+        <section id="categorySection" class="p-5 grid grid-cols-2 ">
         </section>
         <section id="searchResultsSection" class="p-5 flex flex-wrap flex-col items-center">
-            <article class="border-solid border-gray-800 border-2 w-full bg-darkblue2 rounded-lg overflow-hidden h-44 flex flex-row">
-                <div class="imgResultContainer w-2/5 ">
-                    <img src="https://image.tmdb.org/t/p/w342/hYqOjJ7Gh1fbqXrxlIao1g8ZehF.jpg" alt="result movie picture" >
+            <article class=" searchResultArticle">
+                <div class="imgResultContainer ">
+                    <img class="imgResult" src="https://image.tmdb.org/t/p/w342/hYqOjJ7Gh1fbqXrxlIao1g8ZehF.jpg" alt="result movie picture" >
                 </div>
-                <div class="descriptionResultContainer flex flex-col items-start px-2 py-3">
-                    <h4 class="tituloRandomMovie text-left text-gray-200">Avengers: Endgame</h4>
-                    <span class="genresOf font-montserrat text-sm my-2 text-gray-200">Action, Adventure, Drama</span>
-                    <div class="featuresOfResult flex flex-row flex-wrap">
-                        <span class="spanSquare imbdSpan spanSquare m-1 bg-gray-800 text-gray-300 font-normal">IMBD 8.4</span>
-                        <span class="featureOfResult spanSquare m-1 bg-gray-800 text-gray-300 font-normal">2019</span>
-                        <span class="featureOfResult m-1 spanSquare bg-gray-800 text-gray-300 font-normal">13+</span>
-                        <span class="featureOfResult  m-1 spanSquare  bg-gray-800 text-gray-300 font-normal">ES</span>
+                <div class="descriptionResultContainer">
+                    <h4 class="tituloRandomMovie text-left">Avengers: Endgame</h4>
+                    <span class="searchResultSubtitle">Action, Adventure, Drama</span>
+                    <div class="featuresOfResult">
+                        <span class=" imbdSpan spanSquare mt-1">IMBD 8.4</span>
+                        <span class="spanSquare">2019</span>
+                        <span class="spanSquare">13+</span>
+                        <span class="spanSquare">ES</span>
                     </div>
                 </div>
             </article>     
