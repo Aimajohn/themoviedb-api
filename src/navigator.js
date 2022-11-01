@@ -16,6 +16,9 @@ function navigator(){
     else if(location.hash.startsWith('#movie=')){
         moviePage()
     }
+    else if(location.hash.startsWith('#similarMovies=')){
+        similarPage()
+    }
     else if(location.hash.startsWith('#search=')){
         const [_, query] = location.hash.split('=')
         searchPage(query)
@@ -41,7 +44,7 @@ function searchPage(query){
 }
 function trendsPage(){
     const toRemove = [backButton, tuneButton, trendingSectionTitle, ]
-    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends]
+    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, similarSection]
     trendingSection.classList.add('pt-20')
     addHidden(toAdd)
     removeHidden(toRemove)
@@ -50,24 +53,41 @@ function trendsPage(){
     trendingMoviesContainer.classList.add('justify-evenly')
     getTrendings()
 }
-function homePage(){
+async function homePage(){
     const toAdd = [backButton,tuneButton,movieDescription,searchPageTitle,searchResultsSection, moviesByCategory]
-    const toRemove = [searchInputContainer,categorySection,pageLogo,heroPoster,trendingSection,categorySection, verMasTrends, trendingMoviesContainer]
+    const toRemove = [searchInputContainer,categorySection,pageLogo,heroPoster,trendingSection,categorySection, verMasTrends, trendingMoviesContainer, similarSection, trendingSectionTitle]
     addHidden(toAdd)
     removeHidden(toRemove)
-    
+    trendingSectionTitle.classList.remove('mt-20')
     trendingMoviesContainer.classList.remove('flex-wrap')
     trendingMoviesContainer.classList.remove('justify-evenly')
     trendingSection.classList.remove('pt-20')
     trendingSectionTitle.textContent = 'Trending Movies'
     searchInputContainer.classList.remove('mt-28')
-    getTrendings()
+    similarMoviesContainer.classList.remove('flex-wrap')
+    similarMoviesContainer.classList.remove('justify-evenly')
     getCategoryList()
+    await getTrendings()
+    getHero(heroPoster.dataset.id)
+    getSimilarmovies(heroPoster.dataset.id)
 }
+
+async function similarPage(){
+    const toRemove = [backButton, tuneButton , similarSection, ]
+    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingSectionTitle, trendingSection]
+    similarSectionTitle.classList.add('mt-20')
+    addHidden(toAdd)
+    removeHidden(toRemove)
+    
+    similarMoviesContainer.classList.add('flex-wrap')
+    similarMoviesContainer.classList.add('justify-evenly')
+    getSimilarmovies(heroPoster.dataset.id)
+}
+
 function categoryPage(category){
     const [categoryName, categoryId] = category.split('-')
     const toRemove = [backButton, tuneButton, trendingSectionTitle, moviesByCategory]
-    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingMoviesContainer]
+    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingMoviesContainer, similarSection,]
     addHidden(toAdd)
     removeHidden(toRemove)
     trendingSectionTitle.textContent = categoryName
@@ -76,10 +96,14 @@ function categoryPage(category){
 }
 
 function moviePage(){
-    const toAdd = [searchInputContainer, categorySection, searchPageTitle, tuneButton, searchResultsSection]
-    const toRemove = [movieDescription, backButton]
+    const toAdd = [searchInputContainer, categorySection, searchPageTitle, tuneButton, searchResultsSection, trendingMoviesContainer, trendingSection,]
+    const toRemove = [movieDescription, backButton, heroPoster, pageLogo]
     addHidden(toAdd)
     removeHidden(toRemove)
-    trendingSectionTitle.textContent = 'Peliculas Similares'
-    getTrendings()
+    similarMoviesContainer.classList.remove('flex-wrap')
+    similarMoviesContainer.classList.remove('justify-evenly')
+    const [_, query] = location.hash.split('=')
+    heroPoster.dataset.id = query
+    getHero(query)
+    getSimilarmovies(query)
 }

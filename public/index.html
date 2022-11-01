@@ -17,9 +17,9 @@
         <button id="backButton" type="button" class="p-5 material-symbols-rounded text-gray-100 absolute z-20 left-4">
             arrow_back_ios_new
             </button>
-        <div id="pageLogo" class="w-56">
+        <a href="#home" id="pageLogo" class="w-56">
             <img  class="object-fit" src="../src/imgs/logo2.png" alt="The Moovies Logo">
-        </div>
+        </a>
         <div id="searchPageTitle" class="flex items-center flex-col ">
             <h2 >Results</h2>
             <span class="text-sm text-gray-400 font-montserrat" id="searchInputText">for "Avengers"</span>
@@ -48,7 +48,7 @@
             </div>
             <div id="movieDescription" class="p-5">
                 <h3 class="text-gray-100 font-poppins font-semibold text-xl my-3">Movie Story:</h3>
-                <p class="text-gray-200 ">
+                <p id="movieDescriptionText" class="text-gray-300">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita iste voluptate cupiditate. Ipsam libero nobis rem temporibus repudiandae commodi officiis accusantium. Ut non quo eaque dignissimos, qui expedita a facilis!
                     Error doloremque maiores rerum eos inventore!...
                 </p>
@@ -76,6 +76,11 @@
                 
             </div>
             <div id="moviesByCategory" class="justify-evenly flex-wrap flex flex-row overflow-x-scroll p-4" >
+            </section>
+        <section id="similarSection" class="mt-6 relative">
+            <h2 id="similarSectionTitle" class="text-white font-poppins font-semibold text-2xl px-5">Similar Movies</h2>
+            <button id="verMasSimilar" class="text-gray-200 absolute right-5 top-0 bg-gray-800 py-1 px-3 rounded-lg text-sm">ver más...</button>
+            <div id="similarMoviesContainer" class=" flex flex-row overflow-x-scroll p-4" ></div>
             </div>
         </section>
         <section id="categorySection" class="p-5 grid grid-cols-2 ">

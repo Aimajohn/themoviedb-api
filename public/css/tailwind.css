@@ -571,6 +571,22 @@ video {
   flex-grow: 1;
   overflow: hidden;
   border-radius: 0.375rem;
+}
+
+.movieContainer::after {
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to top, var(--tw-gradient-stops));
+  --tw-gradient-from: transparent;
+  --tw-gradient-to: rgb(0 0 0 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  content: var(--tw-content);
+  --tw-gradient-to: transparent;
+}
+
+.movieContainer{
   flex-basis: 150px;
   min-width: 150px;
 }
@@ -615,6 +631,7 @@ video {
 }
 
 .searchResultArticle {
+  position: relative;
   margin-bottom: 0.75rem;
   display: flex;
   width: 91.666667%;
@@ -628,6 +645,22 @@ video {
   border-color: rgb(31 41 55 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(0 6 29 / var(--tw-bg-opacity));
+}
+
+.searchResultArticle::after {
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to top, var(--tw-gradient-stops));
+  --tw-gradient-from: transparent;
+  --tw-gradient-to: rgb(0 0 0 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  content: var(--tw-content);
+  --tw-gradient-to: transparent;
+}
+
+.searchResultArticle{
   max-width: 500px;
 }
 
@@ -744,6 +777,10 @@ video {
 
 .mt-28 {
   margin-top: 7rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
 }
 
 .flex {

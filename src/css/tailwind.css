@@ -17,7 +17,7 @@
         @apply  relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95;
     }
     .movieContainer{
-        @apply relative  my-5 mx-2 rounded-md overflow-hidden flex-grow;
+        @apply relative my-5 mx-2 rounded-md overflow-hidden flex-grow after:absolute after:w-full after:h-full after:top-0 after:bg-gradient-to-t after:from-transparent after:to-transparent;
         flex-basis: 150px;
         min-width: 150px;
     }
@@ -32,7 +32,7 @@
         @apply absolute flex flex-col bottom-2 right-3 items-end 
     }
     .searchResultArticle{
-        @apply border-solid border-gray-800 border-2 bg-darkblue2 rounded-lg overflow-hidden  flex flex-row basis-44 w-11/12 mb-3;
+        @apply relative border-solid border-gray-800 border-2 bg-darkblue2 rounded-lg overflow-hidden  flex flex-row basis-44 w-11/12 mb-3 after:absolute after:w-full after:h-full after:top-0 after:bg-gradient-to-t after:from-transparent after:to-transparent;
         max-width: 500px;
     }
     .imgResultContainer{

@@ -1,4 +1,7 @@
 
+// Header functions
+
+
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3',
     params:{
@@ -6,19 +9,23 @@ const api = axios.create({
     }
 })
 
-backButton.addEventListener('click', goBack)
-searchButton.addEventListener('click', searchMovie)
-searchInput.addEventListener('keydown', (event)=>{
-    if(event.key == 'Enter'){
-        searchMovie()
-    }
+backButton.addEventListener('click', ()=>{
+    window.scrollTo(0,0)
+    location.hash = window.history.back()
 })
+searchButton.addEventListener('click', searchMovie)
+searchInput.addEventListener('keydown', (event)=>(event.key == 'Enter')?searchMovie() :null)
+verMasSimilar.addEventListener('click', ()=>location.hash = `#similarMovies=${heroPoster.dataset.id}`)
+
+
+//Utils functions 
 
 function redondear(numero){
     if(numero == 0){
         return "IMBD No"
      }else{ 
-        return `IMBD ${(Math.floor(numero*10)/10).toFixed(1) }`
+        const n = (Math.floor(numero*10)/10).toFixed(1)
+        return `IMBD ${(n == 10.00)? '10.': n}`
     }
 }
 
@@ -42,27 +49,13 @@ function render(movieList){
         imgRandomMovieContainer.append(movieImg)
         movieHeader.append(tituloRandomMovie,imbdSpan)
         movieContainer.append(imgRandomMovieContainer, movieHeader)
-
+        movieContainer.dataset.id = movie.id
         movieImg.setAttribute('src', 'https://image.tmdb.org/t/p/w342' + movie.poster_path)
         tituloRandomMovie.textContent = movie.title
         imbdSpan.textContent = redondear(movie.vote_average)
         moviesRendered.push(movieContainer)
     })
     return moviesRendered
-}
-
-async function getTrendings(){
-    const {data} = await api('/trending/movie/day') 
-    console.log(data.results)
-
-    const heroMovie = data.results[data.results.length-2]
-    heroMovieImg.setAttribute('src', 'https://image.tmdb.org/t/p/w500'+heroMovie.poster_path)
-    heroMovieTitle.textContent = heroMovie.title
-    heroMovieScore.textContent = redondear(heroMovie.vote_average)
-    trendingMoviesContainer.innerHTML = ''
-
-    const movieList = render(data.results)
-    trendingMoviesContainer.append(...movieList)
 }
 
 async function categoryList(){
@@ -72,36 +65,6 @@ async function categoryList(){
         myList[genre.id] = genre.name
     })
     return myList
-}
-
-async function getCategoryList(){
-    const categories = await categoryList()
-    const buttons = []
-    console.log(categories)
-    for(genre in categories){
-        const name =  categories[genre]
-        const id =  genre
-        const categoryButton = document.createElement('button')
-        categoryButton.setAttribute('type', 'button')
-        categoryButton.setAttribute('id', `genre-${id}`)
-        categoryButton.classList.add('categoryButton')
-        categoryButton.textContent = name
-        categoryButton.addEventListener('click', ()=>location.hash=`#category=${name}-${id}`)
-        buttons.push(categoryButton)
-    }
-    categorySection.innerHTML = ''
-    categorySection.append(...buttons)
-}
-
-async function getCategory(id){
-    const {data} = await api('/discover/movie',{
-        params: {
-            with_genres: id
-        }
-    }) 
-    moviesByCategory.innerHTML = ''
-    const movieList = render(data.results)
-    moviesByCategory.append(...movieList)
 }
 
 function render2(movieList, categories){
@@ -139,14 +102,19 @@ function render2(movieList, categories){
         titulo.textContent = movie.title
         genres.textContent = categories[movie.genre_ids[0]]
         imbdButton.textContent = redondear(movie.vote_average)
-        const [year, month, day] = movie.release_date.split('-')
-        date.textContent = year
+        if(movie.release_date){
+            const [year, month, day] = movie.release_date.split('-')
+            date.textContent = year
+        }else{
+            date.textContent = 'nd'
+        }
         age.textContent = movie.adult? '+18' : '+13'
         language.textContent = movie.original_language
         features.append(imbdButton, age, date, language)
         description.append(titulo, genres, features)
         imgContainer.append(img)
         article.append(imgContainer, description)
+        article.dataset.id = movie.id
         if(movie.poster_path){
             movies.push(article)
         }else{
@@ -156,6 +124,60 @@ function render2(movieList, categories){
     return [...movies, ...moviesFaceless]
 }
 
+
+
+// main renderSection Functions 
+
+async function getHero(id){
+
+    const {data} = await api(`/movie/${id}`)
+    heroMovieImg.setAttribute('src', 'https://image.tmdb.org/t/p/w500'+data.poster_path)
+    heroMovieTitle.textContent = data.title
+    heroMovieScore.textContent = redondear(data.vote_average)
+    movieDescriptionText.textContent = data.overview
+}
+
+async function getTrendings(){
+    const {data} = await api('/trending/movie/day') 
+    const n = Math.floor(Math.random() * data.results.length)
+    heroPoster.dataset.id = data.results[n].id 
+    trendingMoviesContainer.innerHTML = ''
+    const movieList = render(data.results)
+    trendingMoviesContainer.append(...movieList)
+    trendingMoviesContainer.addEventListener('click', (event)=>{
+        location.hash = '#movie='+event.target.dataset.id
+    })
+}
+
+async function getCategoryList(){
+    const categories = await categoryList()
+    const buttons = []
+    for(genre in categories){
+        const name =  categories[genre]
+        const id =  genre
+        const categoryButton = document.createElement('button')
+        categoryButton.setAttribute('type', 'button')
+        categoryButton.setAttribute('id', `genre-${id}`)
+        categoryButton.classList.add('categoryButton')
+        categoryButton.textContent = name
+        categoryButton.addEventListener('click', ()=>location.hash=`#category=${name}-${id}`)
+        buttons.push(categoryButton)
+    }
+    categorySection.innerHTML = ''
+    categorySection.append(...buttons)
+}
+
+async function getCategory(id){
+    const {data} = await api('/discover/movie',{
+        params: {
+            with_genres: id
+        }
+    }) 
+    moviesByCategory.innerHTML = ''
+    const movieList = render(data.results)
+    moviesByCategory.append(...movieList)
+}
+
 async function searchQuery(query){
     searchInputText.textContent =`for "${query}"` 
     const {data} = await api('/search/movie',{
@@ -163,11 +185,21 @@ async function searchQuery(query){
             query,
         }
     })
-    console.log(data.results)
     const categories = await categoryList()
     const movies = render2(data.results, categories)
     searchResultsSection.innerHTML = ''
     searchResultsSection.append(...movies)
+    searchResultsSection.addEventListener('click', event=>location.hash = '#movie='+event.target.dataset.id )
+}
+
+async function getSimilarmovies(query){
+    const {data} = await api(`/movie/${query}/similar`) 
+    similarMoviesContainer.innerHTML = ''
+    const movieList = render(data.results)
+    similarMoviesContainer.append(...movieList)
+    similarMoviesContainer.addEventListener('click', (event)=>{
+        location.hash = '#movie='+event.target.dataset.id
+    })
 }
 
 function searchMovie(){
@@ -178,6 +210,4 @@ function searchMovie(){
     }
 }
 
-function goBack(){
-    location.hash = window.history.back()
-}
+
