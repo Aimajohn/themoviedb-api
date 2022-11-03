@@ -16,6 +16,18 @@ backButton.addEventListener('click', ()=>{
 searchButton.addEventListener('click', searchMovie)
 searchInput.addEventListener('keydown', (event)=>(event.key == 'Enter')?searchMovie() :null)
 verMasSimilar.addEventListener('click', ()=>location.hash = `#similarMovies=${heroPoster.dataset.id}`)
+verSimilaresPoster.addEventListener('click', ()=>location.hash = `#similarMovies=${heroPoster.dataset.id}`)
+scrollToRight.addEventListener('click', ()=>trendingMoviesContainer.scrollLeft+=500)
+scrollToLeft.addEventListener('click', ()=>trendingMoviesContainer.scrollLeft-=500)
+scrollToRightS.addEventListener('click', ()=>similarMoviesContainer.scrollLeft+=500)
+scrollToLeftS.addEventListener('click', ()=>similarMoviesContainer.scrollLeft-=500)
+similarMoviesContainer.addEventListener('scroll',()=>{
+    if(similarMoviesContainer.scrollLeft > 0){
+        scrollToLeftS.classList.remove('hidden')
+    }else{
+        scrollToLeftS.classList.add('hidden')
+    }
+})
 
 
 //Utils functions 
@@ -124,14 +136,27 @@ function render2(movieList, categories){
     return [...movies, ...moviesFaceless]
 }
 
-
+async function whichSize(width){
+    let awi;
+    [92, 154, 185, 342, 500, 780].forEach(size=>{
+        if(width < size){
+            return awi = size;
+        }
+    })
+    return (awi)?`w${awi}`:"original"
+}
 
 // main renderSection Functions 
 
-async function getHero(id){
-
+async function getHero(id, width){
+    const posterSize = await whichSize(width)
     const {data} = await api(`/movie/${id}`)
-    heroMovieImg.setAttribute('src', 'https://image.tmdb.org/t/p/w500'+data.poster_path)
+    if(typeof(posterSize)=="string"){
+        heroMovieImg.setAttribute('src', `https://image.tmdb.org/t/p/${posterSize}${data.backdrop_path}`)
+    }else{
+        heroMovieImg.setAttribute('src', `https://image.tmdb.org/t/p/${posterSize}${data.poster_path}`)
+    }
+    console.log(data)
     heroMovieTitle.textContent = data.title
     heroMovieScore.textContent = redondear(data.vote_average)
     movieDescriptionText.textContent = data.overview

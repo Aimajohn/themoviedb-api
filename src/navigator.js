@@ -68,7 +68,7 @@ async function homePage(){
     similarMoviesContainer.classList.remove('justify-evenly')
     getCategoryList()
     await getTrendings()
-    getHero(heroPoster.dataset.id)
+    getHero(heroPoster.dataset.id, window.innerWidth)
     getSimilarmovies(heroPoster.dataset.id)
 }
 
@@ -104,6 +104,6 @@ function moviePage(){
     similarMoviesContainer.classList.remove('justify-evenly')
     const [_, query] = location.hash.split('=')
     heroPoster.dataset.id = query
-    getHero(query)
+    getHero(query, window.innerWidth)
     getSimilarmovies(query)
 }
