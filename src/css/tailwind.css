@@ -26,9 +26,8 @@
         @apply  relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95;
     }
     .movieContainer{
-        @apply cursor-pointer relative basis-24 my-5 mx-2  rounded-md overflow-hidden flex-grow after:absolute after:w-full after:h-full after:top-0 after:bg-gradient-to-t after:from-transparent after:to-transparent md:basis-36;
-
-        max-width: 200px;
+        @apply cursor-pointer relative basis-24 my-5 mx-2  rounded-md overflow-hidden flex-grow after:absolute after:w-full after:h-full after:top-0 after:bg-gradient-to-t after:from-transparent after:to-transparent sm:basis-52 min-w-[96px] sm:min-w-[208px];
+        /* max-width: 200px; */
     }
     .spanSquare{
         @apply h-7 mr-1 mt-1 px-2 py-1 rounded-md text-sm font-poppins font-normal bg-gray-800 text-gray-300

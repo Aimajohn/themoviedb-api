@@ -622,6 +622,7 @@ video {
   margin-bottom: 1.25rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+  min-width: 96px;
   flex-grow: 1;
   flex-basis: 6rem;
   cursor: pointer;
@@ -642,14 +643,15 @@ video {
   --tw-gradient-to: transparent;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .movieContainer {
-    flex-basis: 9rem;
+    min-width: 208px;
+    flex-basis: 13rem;
   }
 }
 
 .movieContainer{
-  max-width: 200px;
+  /* max-width: 200px; */
 }
 
 .spanSquare {
