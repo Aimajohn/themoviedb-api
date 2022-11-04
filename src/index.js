@@ -28,6 +28,13 @@ similarMoviesContainer.addEventListener('scroll',()=>{
         scrollToLeftS.classList.add('hidden')
     }
 })
+trendingMoviesContainer.addEventListener('scroll',()=>{
+    if(trendingMoviesContainer.scrollLeft > 0){
+        scrollToLeft.classList.remove('hidden')
+    }else{
+        scrollToLeft.classList.add('hidden')
+    }
+})
 
 
 //Utils functions 
@@ -170,23 +177,42 @@ async function getTrendings(){
     const movieList = render(data.results)
     trendingMoviesContainer.append(...movieList)
     trendingMoviesContainer.addEventListener('click', (event)=>{
-        location.hash = '#movie='+event.target.dataset.id
+        if(event.target.dataset.id){
+            location.hash = '#movie='+event.target.dataset.id
+        }
     })
 }
 
 async function getCategoryList(){
     const categories = await categoryList()
+    console.log(categories)
+    const colors = ['#006A7A', '#D4A418', '#1F0000', '#B4B9D2', '#548EF8', '#4A0218', '#358EFF', '#B47A9B', '#0047B3', '#B998FF']
+    const i = colors.length
     const buttons = []
     for(genre in categories){
         const name =  categories[genre]
         const id =  genre
-        const categoryButton = document.createElement('button')
-        categoryButton.setAttribute('type', 'button')
+        const categoryButton = document.createElement('div')
         categoryButton.setAttribute('id', `genre-${id}`)
         categoryButton.classList.add('categoryButton')
-        categoryButton.textContent = name
-        categoryButton.addEventListener('click', ()=>location.hash=`#category=${name}-${id}`)
+        const square = document.createElement('div')
+        const buttonContent = document.createElement('div')
+        const buttonTitle = document.createElement('h4')
+        const buttonText = document.createElement('p')
+        square.classList.add('decorationSquare')
+        buttonContent.classList.add('mr-5')
+        buttonText.classList.add('buttonVerMas')
+        buttonTitle.classList.add('buttonTitle')
+        buttonTitle.textContent = name
+        buttonText.textContent = 'Ver Mas'
+        
+        square.style.backgroundColor=colors[Math.floor(Math.random()*i)]
+        buttonContent.append(buttonTitle, buttonText)
+        categoryButton.append(square, buttonContent)
         buttons.push(categoryButton)
+
+        
+        categoryButton.addEventListener('click', ()=>location.hash=`#category=${name}-${id}`)
     }
     categorySection.innerHTML = ''
     categorySection.append(...buttons)
@@ -201,6 +227,11 @@ async function getCategory(id){
     moviesByCategory.innerHTML = ''
     const movieList = render(data.results)
     moviesByCategory.append(...movieList)
+    moviesByCategory.addEventListener('click', (event)=>{
+        if(event.target.dataset.id){
+            location.hash = '#movie='+event.target.dataset.id
+        }
+    })
 }
 
 async function searchQuery(query){
@@ -214,7 +245,11 @@ async function searchQuery(query){
     const movies = render2(data.results, categories)
     searchResultsSection.innerHTML = ''
     searchResultsSection.append(...movies)
-    searchResultsSection.addEventListener('click', event=>location.hash = '#movie='+event.target.dataset.id )
+    searchResultsSection.addEventListener('click', event=>{
+        if(event.target.dataset.id){
+            location.hash = '#movie='+event.target.dataset.id
+        }
+    })
 }
 
 async function getSimilarmovies(query){
@@ -223,7 +258,9 @@ async function getSimilarmovies(query){
     const movieList = render(data.results)
     similarMoviesContainer.append(...movieList)
     similarMoviesContainer.addEventListener('click', (event)=>{
-        location.hash = '#movie='+event.target.dataset.id
+        if(event.target.dataset.id){
+            location.hash = '#movie='+event.target.dataset.id
+        }
     })
 }
 

@@ -34,28 +34,28 @@ function navigator(){
 }
 
 function searchPage(query){
-    const toRemove = [backButton, tuneButton,searchPageTitle, searchInputContainer, searchResultsSection]
-    const toAdd = [movieDescription, heroPoster, pageLogo, trendingSection, categorySection, verMasTrends]
+    const toRemove = [backButton,searchPageTitle, searchInputContainer, searchResultsSection]
+    const toAdd = [movieDescription, heroPoster, pageLogo, trendingSection, categorySection, verMasTrends, similarSection, categoriesTitle]
     addHidden(toAdd)
     removeHidden(toRemove)
-    searchInputContainer.classList.add('mt-28')
+    // searchInputContainer.classList.add('mt-28')
+    searchInputContainer.classList.add('searchInputView')
     trendingSectionTitle.textContent = 'Trending Movies'
     searchQuery(query)
 }
 function trendsPage(){
-    const toRemove = [backButton, tuneButton, trendingSectionTitle, ]
-    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, similarSection]
-    trendingSection.classList.add('pt-20')
+    const toRemove = [backButton, trendingSectionTitle, ]
+    const toAdd = [movieDescription, heroPoster, categoriesTitle, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, similarSection]
+    // trendingSection.classList.add('pt-20')
     addHidden(toAdd)
     removeHidden(toRemove)
     
     trendingMoviesContainer.classList.add('flex-wrap')
-    trendingMoviesContainer.classList.add('justify-evenly')
     getTrendings()
 }
 async function homePage(){
-    const toAdd = [backButton,tuneButton,movieDescription,searchPageTitle,searchResultsSection, moviesByCategory]
-    const toRemove = [searchInputContainer,categorySection,pageLogo,heroPoster,trendingSection,categorySection, verMasTrends, trendingMoviesContainer, similarSection, trendingSectionTitle]
+    const toAdd = [backButton,movieDescription,searchPageTitle,searchResultsSection, moviesByCategory]
+    const toRemove = [searchInputContainer, verMasSimilar, categorySection,pageLogo,heroPoster,trendingSection,categorySection, verMasTrends, trendingMoviesContainer, similarSection, trendingSectionTitle, categoriesTitle, ]
     addHidden(toAdd)
     removeHidden(toRemove)
     trendingSectionTitle.classList.remove('mt-20')
@@ -66,6 +66,11 @@ async function homePage(){
     searchInputContainer.classList.remove('mt-28')
     similarMoviesContainer.classList.remove('flex-wrap')
     similarMoviesContainer.classList.remove('justify-evenly')
+    trendingSectionTitle.classList.remove('pt-20')
+    heroPresentation.classList.remove('lg:hidden')
+    searchInputContainer.classList.remove('searchInputView')
+
+
     getCategoryList()
     await getTrendings()
     getHero(heroPoster.dataset.id, window.innerWidth)
@@ -73,33 +78,34 @@ async function homePage(){
 }
 
 async function similarPage(){
-    const toRemove = [backButton, tuneButton , similarSection, ]
-    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingSectionTitle, trendingSection]
-    similarSectionTitle.classList.add('mt-20')
+    const toRemove = [backButton , similarSection, ]
+    const toAdd = [movieDescription, heroPoster, pageLogo, verMasSimilar, categoriesTitle, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingSectionTitle, trendingSection]
+    // similarSectionTitle.classList.add('mt-20')
     addHidden(toAdd)
     removeHidden(toRemove)
     
     similarMoviesContainer.classList.add('flex-wrap')
-    similarMoviesContainer.classList.add('justify-evenly')
     getSimilarmovies(heroPoster.dataset.id)
 }
 
 function categoryPage(category){
     const [categoryName, categoryId] = category.split('-')
-    const toRemove = [backButton, tuneButton, trendingSectionTitle, moviesByCategory]
-    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingMoviesContainer, similarSection,]
+    const toRemove = [backButton, trendingSectionTitle, moviesByCategory]
+    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingMoviesContainer, similarSection, categoriesTitle]
     addHidden(toAdd)
     removeHidden(toRemove)
     trendingSectionTitle.textContent = categoryName
     getCategory(categoryId)
-    trendingSectionTitle.classList.add('pt-20')
+    // trendingSectionTitle.classList.add('pt-20')
 }
 
 function moviePage(){
-    const toAdd = [searchInputContainer, categorySection, searchPageTitle, tuneButton, searchResultsSection, trendingMoviesContainer, trendingSection,]
-    const toRemove = [movieDescription, backButton, heroPoster, pageLogo]
+    const toAdd = [searchInputContainer, categorySection, categoriesTitle,heroPresentation, searchPageTitle, searchResultsSection, trendingMoviesContainer, trendingSection,]
+    const toRemove = [movieDescription, backButton, heroPoster, pageLogo, similarSection]
     addHidden(toAdd)
     removeHidden(toRemove)
+
+    heroPresentation.classList.add('lg:hidden')
     similarMoviesContainer.classList.remove('flex-wrap')
     similarMoviesContainer.classList.remove('justify-evenly')
     const [_, query] = location.hash.split('=')
