@@ -15,7 +15,11 @@ module.exports = {
         '500': '30rem',
       }
     },
-    plugins: [],
-  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
+    plugins: [
+    //   require('cssnano')({
+    //     preset: 'default',
+    // }),
+    ],
+  // purge: ["./src/**/*.{js,jsx,ts,tsx}"],
   }
 }
