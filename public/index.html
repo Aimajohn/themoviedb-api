@@ -41,11 +41,11 @@
             </button>
     </header>
     <section id="heroContainer">
-        <div id="heroPoster" class="relative bg-darkblue w-full h-500" >
-            <div class="overflow-hidden w-full h-500  before:w-full before:h-1/2 before:absolute before:bottom-0 before:right-0 before:bg-gradient-to-b before:from-transparent before:to-darkblue  lg:-mt-16
-            after:w-full after:absolute after:h-20 lg:after:bg-gradient-to-t lg:after:from-transparent lg:after:to-darkblue2 lg:after:bg-opacity-50 after:top-0 after:left-0 
+        <div id="heroPoster" class="relative w-full h-500" >
+            <div class="overflow-hidden w-full h-500  before:w-full before:h-1/2 before:absolute before:bottom-0 before:right-0 before:bg-gradient-to-b before:from-transparent before:to-darkblue lg:-mt-16
+            after:w-full after:absolute after:h-20 lg:after:bg-gradient-to-t lg:after:from-transparent lg:after:to-darkblue2 lg:after:bg-opacity-50 after:top-0 after:left-0 bg-gray-500
             ">
-                <img id="heroMovieImg" src="../src/imgs/blackAdam.jpg" class="object-cover w-full" alt="Peliculas"  >
+                <img id="heroMovieImg" src="" class="object-cover w-full" alt="Peliculas"  >
             </div>
             <div id="heroPresentation" class="absolute top-1/4 pl-5 hidden lg:block drop-shadow-lg" >
                 <h2 class="before:w-10/12 before:h-px before:bg-white before:absolute before:top-3 before:right-0 relative ">Bienvenido</h2>
@@ -80,36 +80,74 @@
         <section id="trendingSection" class="mt-6 relative">
             <h2 id="trendingSectionTitle" class="sectionTitle">Trending Now</h2>
             <a id="verMasTrends" href="#trends=" class="text-gray-200 absolute right-5 top-0 bg-gray-800 py-1 px-3 rounded-lg text-sm">ver más...</a>
-            <div id="trendingMoviesContainer" class=" flex flex-row overflow-x-scroll p-4 scroll-fix" >
-                <!-- <article class="movieContainer ">
-                    <div class="imgRandomMovieContainer " >
-                        <img src="../src/imgs/Fall.jpg" alt="" >
-                    </div>
-                    <div class="absolute flex flex-col bottom-2 right-3">
-                        <h5 class="tituloRandomMovie ">
-                            Fall
-                        </h5>
-                        <button type="button" class="imbdButton px-2 py-1">IMBD 9.8</button>
-                    </div>
-                </article> -->
+            <div id="trendingMoviesContainer" class=" flex flex-row overflow-x-scroll p-4 scroll-fix " >
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
                 
             </div>
-            <div id="moviesByCategory" class="justify-evenly flex-wrap flex flex-row overflow-x-scroll lg:overflow-hidden p-4" >
+            <div id="moviesByCategory" class="flex-wrap flex flex-row overflow-x-scroll lg:overflow-hidden p-4" >
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
             </div>
-            <button id="scrollToRight" class="absolute right-0 bottom-0 h-72 w-20 material-symbols-rounded bg-gradient-to-r from-transparent to-darkblue ">arrow_forward_ios</button>
-            <button id="scrollToLeft" class="absolute left-0 bottom-0 h-72 w-20 material-symbols-rounded bg-gradient-to-l from-transparent to-darkblue hidden">arrow_back_ios</button>
+            <button id="scrollToRight" class="material-symbols-rounded buttonMoveRight">arrow_forward_ios</button>
+            <button id="scrollToLeft" class="material-symbols-rounded buttonMoveLeft">arrow_back_ios</button>
             </section>
         <section id="similarSection" class="mt-6 relative">
             <h2 id="similarSectionTitle" class="sectionTitle">Similar Movies</h2>
             <button id="verMasSimilar" class="text-gray-200 absolute right-5 top-0 bg-gray-800 py-1 px-3 rounded-lg text-sm">ver más...</button>
-            <div id="similarMoviesContainer" class="flex flex-row overflow-x-scroll p-4 scroll-fix" ></div>
+            <div id="similarMoviesContainer" class="flex flex-row overflow-x-scroll p-4 scroll-fix" >
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
+                <article class="movieContainer bg-gray-50 animate-pulse h-80"></article>
             </div>
-            <button id="scrollToRightS" class="absolute right-0 bottom-0 h-72 w-20 material-symbols-rounded bg-gradient-to-r from-transparent to-darkblue ">arrow_forward_ios</button>
-            <button id="scrollToLeftS" class="absolute left-0 bottom-0 h-72 w-20 material-symbols-rounded bg-gradient-to-l from-transparent to-darkblue hidden">arrow_back_ios</button>
+            </div>
+            <button id="scrollToRightS" class="material-symbols-rounded buttonMoveRight">arrow_forward_ios</button>
+            <button id="scrollToLeftS" class="material-symbols-rounded buttonMoveLeft">arrow_back_ios</button>
             </section>
         </section>
         <h2 id="categoriesTitle" class="sectionTitle">Categories</h2>
         <section id="categorySection" class="p-5 flex flex-wrap">
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse "></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
+            <div class="categoryButton bg-gray-50 hover:bg-gray-50 animate-pulse"></div>
         </section>
         <section id="searchResultsSection" class="p-5 flex flex-wrap flex-col items-center lg:flex-row lg:justify-center">
             <article class=" searchResultArticle">

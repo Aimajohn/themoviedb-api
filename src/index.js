@@ -173,8 +173,8 @@ async function getTrendings(){
     const {data} = await api('/trending/movie/day') 
     const n = Math.floor(Math.random() * data.results.length)
     heroPoster.dataset.id = data.results[n].id 
-    trendingMoviesContainer.innerHTML = ''
     const movieList = render(data.results)
+    trendingMoviesContainer.innerHTML = ''
     trendingMoviesContainer.append(...movieList)
     trendingMoviesContainer.addEventListener('click', (event)=>{
         if(event.target.dataset.id){

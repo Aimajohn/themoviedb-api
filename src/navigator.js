@@ -35,7 +35,7 @@ function navigator(){
 
 function searchPage(query){
     const toRemove = [backButton,searchPageTitle, searchInputContainer, searchResultsSection]
-    const toAdd = [movieDescription, heroPoster, pageLogo, trendingSection, categorySection, verMasTrends, similarSection, categoriesTitle]
+    const toAdd = [movieDescription, heroPoster, pageLogo, trendingSection, categorySection, verMasTrends, similarSection, categoriesTitle, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRigthS]
     addHidden(toAdd)
     removeHidden(toRemove)
     // searchInputContainer.classList.add('mt-28')
@@ -45,22 +45,32 @@ function searchPage(query){
 }
 function trendsPage(){
     const toRemove = [backButton, trendingSectionTitle, ]
-    const toAdd = [movieDescription, heroPoster, categoriesTitle, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, similarSection]
+    const toAdd = [movieDescription, heroPoster, categoriesTitle, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, similarSection, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
     // trendingSection.classList.add('pt-20')
     addHidden(toAdd)
     removeHidden(toRemove)
     
+    trendingMoviesContainer.classList.add('sm:w-[98%]')
+    trendingMoviesContainer.classList.add('sm:mx-auto')
     trendingMoviesContainer.classList.add('flex-wrap')
     getTrendings()
 }
 async function homePage(){
     const toAdd = [backButton,movieDescription,searchPageTitle,searchResultsSection, moviesByCategory]
-    const toRemove = [searchInputContainer, verMasSimilar, categorySection,pageLogo,heroPoster,trendingSection,categorySection, verMasTrends, trendingMoviesContainer, similarSection, trendingSectionTitle, categoriesTitle, ]
+    const toRemove = [searchInputContainer, verMasSimilar, categorySection,pageLogo,heroPoster,trendingSection,categorySection, verMasTrends, trendingMoviesContainer, similarSection, trendingSectionTitle, categoriesTitle, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS ]
     addHidden(toAdd)
     removeHidden(toRemove)
     trendingSectionTitle.classList.remove('mt-20')
     trendingMoviesContainer.classList.remove('flex-wrap')
     trendingMoviesContainer.classList.remove('justify-evenly')
+    trendingMoviesContainer.classList.remove('justify-evenly')
+    trendingMoviesContainer.classList.remove('sm:w-[98%]')
+    trendingMoviesContainer.classList.remove('sm:mx-auto')
+    trendingMoviesContainer.classList.remove('justify-evenly')
+    trendingMoviesContainer.classList.remove('sm:w-[98%]')
+    trendingMoviesContainer.classList.remove('sm:mx-auto')
+    similarMoviesContainer.classList.remove('sm:w-[98%]')
+    similarMoviesContainer.classList.remove('sm:mx-auto')
     trendingSection.classList.remove('pt-20')
     trendingSectionTitle.textContent = 'Trending Movies'
     searchInputContainer.classList.remove('mt-28')
@@ -79,11 +89,13 @@ async function homePage(){
 
 async function similarPage(){
     const toRemove = [backButton , similarSection, ]
-    const toAdd = [movieDescription, heroPoster, pageLogo, verMasSimilar, categoriesTitle, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingSectionTitle, trendingSection]
+    const toAdd = [movieDescription, heroPoster, pageLogo, verMasSimilar, categoriesTitle, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingSectionTitle, trendingSection, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
     // similarSectionTitle.classList.add('mt-20')
     addHidden(toAdd)
     removeHidden(toRemove)
     
+    similarMoviesContainer.classList.add('sm:w-[98%]')
+    similarMoviesContainer.classList.add('sm:mx-auto')
     similarMoviesContainer.classList.add('flex-wrap')
     getSimilarmovies(heroPoster.dataset.id)
 }
@@ -91,16 +103,18 @@ async function similarPage(){
 function categoryPage(category){
     const [categoryName, categoryId] = category.split('-')
     const toRemove = [backButton, trendingSectionTitle, moviesByCategory]
-    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingMoviesContainer, similarSection, categoriesTitle]
+    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingMoviesContainer, similarSection, categoriesTitle, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
     addHidden(toAdd)
     removeHidden(toRemove)
+    moviesByCategory.classList.add('sm:w-[98%]')
+    moviesByCategory.classList.add('sm:mx-auto')
     trendingSectionTitle.textContent = categoryName
     getCategory(categoryId)
     // trendingSectionTitle.classList.add('pt-20')
 }
 
 function moviePage(){
-    const toAdd = [searchInputContainer, categorySection, categoriesTitle,heroPresentation, searchPageTitle, searchResultsSection, trendingMoviesContainer, trendingSection,]
+    const toAdd = [searchInputContainer, categorySection, categoriesTitle,heroPresentation, searchPageTitle, searchResultsSection, trendingMoviesContainer, trendingSection, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRigthS]
     const toRemove = [movieDescription, backButton, heroPoster, pageLogo, similarSection]
     addHidden(toAdd)
     removeHidden(toRemove)
