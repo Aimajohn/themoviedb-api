@@ -1,6 +1,7 @@
+let page = 1;
+let maxPage;
 
 // Header functions
-
 
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3',
@@ -9,35 +10,17 @@ const api = axios.create({
     }
 })
 
-backButton.addEventListener('click', ()=>{
-    window.scrollTo(0,0)
-    location.hash = window.history.back()
-})
-searchButton.addEventListener('click', searchMovie)
-searchInput.addEventListener('keydown', (event)=>(event.key == 'Enter')?searchMovie() :null)
-verMasSimilar.addEventListener('click', ()=>location.hash = `#similarMovies=${heroPoster.dataset.id}`)
-verSimilaresPoster.addEventListener('click', ()=>location.hash = `#similarMovies=${heroPoster.dataset.id}`)
-scrollToRight.addEventListener('click', ()=>trendingMoviesContainer.scrollLeft+=500)
-scrollToLeft.addEventListener('click', ()=>trendingMoviesContainer.scrollLeft-=500)
-scrollToRightS.addEventListener('click', ()=>similarMoviesContainer.scrollLeft+=500)
-scrollToLeftS.addEventListener('click', ()=>similarMoviesContainer.scrollLeft-=500)
-similarMoviesContainer.addEventListener('scroll',()=>{
-    if(similarMoviesContainer.scrollLeft > 0){
-        scrollToLeftS.classList.remove('hidden')
-    }else{
-        scrollToLeftS.classList.add('hidden')
-    }
-})
-trendingMoviesContainer.addEventListener('scroll',()=>{
-    if(trendingMoviesContainer.scrollLeft > 0){
-        scrollToLeft.classList.remove('hidden')
-    }else{
-        scrollToLeft.classList.add('hidden')
-    }
-})
-
 
 //Utils functions 
+
+const callback = (entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.setAttribute('src', entry.target.getAttribute('data-src')) 
+        }
+    })
+}
+const observer = new IntersectionObserver(callback)
 
 function redondear(numero){
     if(numero == 0){
@@ -48,7 +31,7 @@ function redondear(numero){
     }
 }
 
-function render(movieList){
+function render(movieList, lazy=false){
     const moviesRendered = []
     movieList.forEach(movie => {
         const movieContainer = document.createElement('article');
@@ -65,25 +48,21 @@ function render(movieList){
         imbdSpan.classList.add('imbdSpan')
         imbdSpan.classList.add('spanSquare')
 
+        movieImg.classList.add('movieImg')
         imgRandomMovieContainer.append(movieImg)
         movieHeader.append(tituloRandomMovie,imbdSpan)
         movieContainer.append(imgRandomMovieContainer, movieHeader)
         movieContainer.dataset.id = movie.id
-        movieImg.setAttribute('src', 'https://image.tmdb.org/t/p/w342' + movie.poster_path)
+        movieImg.setAttribute( lazy?'data-src':'src', 'https://image.tmdb.org/t/p/w342' + movie.poster_path)
+        // movieImg.setAttribute('loading', 'lazy')
+        if(lazy){
+            observer.observe(movieImg)
+        }
         tituloRandomMovie.textContent = movie.title
         imbdSpan.textContent = redondear(movie.vote_average)
         moviesRendered.push(movieContainer)
     })
     return moviesRendered
-}
-
-async function categoryList(){
-    const {data} = await api('/genre/movie/list') 
-    const myList = {}
-    data.genres.forEach(genre=>{
-        myList[genre.id] = genre.name
-    })
-    return myList
 }
 
 function render2(movieList, categories){
@@ -117,7 +96,6 @@ function render2(movieList, categories){
         language.classList.add('spanSquare')
         age.classList.add('spanSquare')
 
-        img.setAttribute('src', 'https://image.tmdb.org/t/p/w342'+ movie.poster_path)
         titulo.textContent = movie.title
         genres.textContent = categories[movie.genre_ids[0]]
         imbdButton.textContent = redondear(movie.vote_average)
@@ -135,12 +113,23 @@ function render2(movieList, categories){
         article.append(imgContainer, description)
         article.dataset.id = movie.id
         if(movie.poster_path){
+            img.setAttribute('src', 'https://image.tmdb.org/t/p/w342'+ movie.poster_path)
             movies.push(article)
         }else{
+            img.setAttribute('src', '/src/imgs/default.png')
             moviesFaceless.push(article)
         }
     })
     return [...movies, ...moviesFaceless]
+}
+
+async function categoryList(){
+    const {data} = await api('/genre/movie/list') 
+    const myList = {}
+    data.genres.forEach(genre=>{
+        myList[genre.id] = genre.name
+    })
+    return myList
 }
 
 async function whichSize(width){
@@ -150,7 +139,36 @@ async function whichSize(width){
             return awi = size;
         }
     })
-    return (awi)?`w${awi}`:"original"
+    return (awi)?awi:"original"
+}
+
+// Infinitive Pages
+
+async function trendingChunk(page=1){
+    const {data} = await api('/trending/movie/day',{
+        params:{
+            page,
+        }
+    }) 
+    return data
+}
+
+async function categoryChunk(id, page=1){
+    const {data} = await api('/discover/movie',{
+        params: {
+            with_genres: id,
+        }
+    }) 
+    return data
+}
+
+async function similarChunk(query, page=1){
+    const {data} = await api(`/movie/${query}/similar`,{
+        params:{
+            page,
+        }
+    }) 
+    return data
 }
 
 // main renderSection Functions 
@@ -161,31 +179,31 @@ async function getHero(id, width){
     if(typeof(posterSize)=="string"){
         heroMovieImg.setAttribute('src', `https://image.tmdb.org/t/p/${posterSize}${data.backdrop_path}`)
     }else{
-        heroMovieImg.setAttribute('src', `https://image.tmdb.org/t/p/${posterSize}${data.poster_path}`)
+        heroMovieImg.setAttribute('src', `https://image.tmdb.org/t/p/${`w${posterSize}`}${data.poster_path}`)
     }
-    console.log(data)
     heroMovieTitle.textContent = data.title
     heroMovieScore.textContent = redondear(data.vote_average)
     movieDescriptionText.textContent = data.overview
 }
 
 async function getTrendings(){
-    const {data} = await api('/trending/movie/day') 
+    const data = await trendingChunk()
+    maxPage = data.total_pages
     const n = Math.floor(Math.random() * data.results.length)
     heroPoster.dataset.id = data.results[n].id 
-    const movieList = render(data.results)
+    const movieList = render(data.results, true)
     trendingMoviesContainer.innerHTML = ''
     trendingMoviesContainer.append(...movieList)
     trendingMoviesContainer.addEventListener('click', (event)=>{
+        console.log(event.target)
         if(event.target.dataset.id){
             location.hash = '#movie='+event.target.dataset.id
         }
-    })
+    }, true)
 }
 
 async function getCategoryList(){
     const categories = await categoryList()
-    console.log(categories)
     const colors = ['#006A7A', '#D4A418', '#1F0000', '#B4B9D2', '#548EF8', '#4A0218', '#358EFF', '#B47A9B', '#0047B3', '#B998FF']
     const i = colors.length
     const buttons = []
@@ -219,11 +237,7 @@ async function getCategoryList(){
 }
 
 async function getCategory(id){
-    const {data} = await api('/discover/movie',{
-        params: {
-            with_genres: id
-        }
-    }) 
+    const data = await categoryChunk(id)
     moviesByCategory.innerHTML = ''
     const movieList = render(data.results)
     moviesByCategory.append(...movieList)
@@ -253,15 +267,16 @@ async function searchQuery(query){
 }
 
 async function getSimilarmovies(query){
-    const {data} = await api(`/movie/${query}/similar`) 
+    const data = await similarChunk(query)
     similarMoviesContainer.innerHTML = ''
     const movieList = render(data.results)
     similarMoviesContainer.append(...movieList)
     similarMoviesContainer.addEventListener('click', (event)=>{
+        console.log('hola')
         if(event.target.dataset.id){
             location.hash = '#movie='+event.target.dataset.id
         }
-    })
+    }, true)
 }
 
 function searchMovie(){

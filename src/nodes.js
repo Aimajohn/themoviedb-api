@@ -28,3 +28,5 @@ const scrollToLeftS = document.getElementById('scrollToLeftS')
 const scrollToRightS = document.getElementById('scrollToRightS')
 const categoriesTitle = document.getElementById('categoriesTitle')
 const heroPresentation = document.getElementById('heroPresentation')
+
+

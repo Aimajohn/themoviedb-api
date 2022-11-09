@@ -20,13 +20,15 @@
         @apply w-6 h-6 md:w-12 md:h-12 rounded-lg mx-2 md:mx-3 bg-gray-500
     }
     .tituloRandomMovie{
-        @apply bottom-0 text-gray-200 font-poppins font-semibold text-xl text-right leading-5 
+        @apply hidden sm:block bottom-0 text-gray-200 font-poppins font-semibold text-xl text-right leading-5 
     }
     .imgRandomMovieContainer{
         @apply  relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95;
     }
     .movieContainer{
-        @apply cursor-pointer relative basis-24 my-5 mx-2  rounded-md overflow-hidden flex-grow after:absolute after:w-full after:h-full after:top-0 after:bg-gradient-to-t after:from-transparent after:to-transparent sm:basis-52 min-w-[96px] lg:min-w-[200px] sm:max-w-[230px];
+        @apply h-[144px] w-[96px] sm:min-w-[150px] sm:min-h-[200px] lg:min-w-[200px] lg:min-h-[300px] lg:max-w-[250px]  bg-gray-300 cursor-pointer relative my-5 mx-2  rounded-md overflow-hidden flex-grow 
+        after:absolute after:w-full after:h-full after:top-0 after:bg-gradient-to-t after:from-transparent after:to-transparent 
+        shrink-0
         /* max-width: 200px; */
     }
     .spanSquare{
@@ -53,6 +55,7 @@
         @apply w-2/5 flex items-center h-full bg-black;
         max-width: 145px;
     }
+    
     .imgResult{
         @apply min-h-full object-cover
     }
@@ -76,7 +79,7 @@
         @apply text-white font-poppins font-semibold text-2xl px-5
     }
     .buttonMoveLeft{
-        @apply  absolute bottom-0 left-0 h-5/6 w-20 bg-gradient-to-l from-transparent to-darkblue;
+        @apply hidden absolute bottom-0 left-0 h-5/6 w-20 bg-gradient-to-l from-transparent to-darkblue;
     }
     .buttonMoveRight{
         @apply  absolute bottom-0 h-5/6 right-0 w-20 bg-gradient-to-r from-transparent to-darkblue;
