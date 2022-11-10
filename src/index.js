@@ -43,6 +43,7 @@ function render(movieList, lazy=false){
         const tituloRandomMovie = document.createElement('h5');
         const imbdSpan = document.createElement('span');
         const favButton = document.createElement('div')
+        const heart = document.createElement('span')
         
         movieContainer.classList.add('movieContainer')
         imgRandomMovieContainer.classList.add('imgRandomMovieContainer')
@@ -51,9 +52,11 @@ function render(movieList, lazy=false){
         imbdSpan.classList.add('imbdSpan')
         imbdSpan.classList.add('spanSquare')
         favButton.classList.add('favButton')
+        heart.classList.add('heart')
         
-        favButton.innerText = (localStorage.getItem(movie.id))?'❤️':'🖤'
+      
         imgRandomMovieContainer.append(movieImg)
+        favButton.append(heart)
         movieHeader.append(tituloRandomMovie,imbdSpan)
         movieContainer.append(imgRandomMovieContainer, movieHeader)
         movieContainer.append(favButton)
@@ -64,16 +67,22 @@ function render(movieList, lazy=false){
         if(lazy){
             observer.observe(movieImg)
         }
+
+        if(localStorage.getItem(movie.id)){
+            favButton.classList.toggle("heart-active")
+            heart.classList.toggle("heart-active")
+        }
+
         tituloRandomMovie.textContent = movie.title
         imbdSpan.textContent = redondear(movie.vote_average)
         moviesRendered.push(movieContainer)
         favButton.addEventListener('click',()=>{
+            favButton.classList.toggle("heart-active")
+            heart.classList.toggle("heart-active")
             if(localStorage.getItem(movie.id)){
-                favButton.textContent = '🖤'
                 localStorage.removeItem(movie.id)
 
             }else{
-                favButton.textContent = '❤️'
                 localStorage.setItem(movie.id, JSON.stringify(movie))
             }
             if(localStorage.length){
