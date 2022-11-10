@@ -21,8 +21,8 @@ module.exports = {
     plugins: [
       require('cssnano')({
         preset: 'default',
-      })
+      }),
     ],
-  // purge: ["./src/**/*.{js,jsx,ts,tsx}"],
+    purge: ["./src/**/*.{js,jsx,ts,tsx,}", "./public/*.html"],
   }
 }
