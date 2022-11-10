@@ -51,10 +51,11 @@ function navigator(){
 
 function searchPage(query){
     const toRemove = [backButton,searchPageTitle, searchInputContainer, searchResultsSection]
-    const toAdd = [movieDescription, heroPoster, pageLogo, trendingSection, categorySection, verMasTrends, similarSection, categoriesTitle, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
+    const toAdd = [movieDescription, heroPoster, pageLogo, trendingSection, categorySection, verMasTrends, similarSection, categoriesTitle, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS, likedSection]
     addHidden(toAdd)
     removeHidden(toRemove)
     // searchInputContainer.classList.add('mt-28')
+    
     searchInputContainer.classList.add('searchInputView')
     trendingSectionTitle.textContent = 'Trending Movies'
     searchQuery(query)

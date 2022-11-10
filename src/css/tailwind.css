@@ -23,12 +23,15 @@
     .tituloRandomMovie{
         @apply hidden sm:block bottom-0 text-gray-200 font-poppins font-semibold text-xl text-right leading-5 
     }
+    .tituloSearchedMovie{
+        @apply sm:block bottom-0 text-gray-200 font-poppins font-semibold text-xl text-right leading-5 
+    }
     
     .imgRandomMovieContainer{
         @apply h-full  relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95;
     }
     .movieContainer{
-        @apply h-[144px] w-[96px] sm:min-w-[150px] sm:min-h-[200px] lg:min-w-[200px] lg:min-h-[300px] lg:max-w-[250px]  bg-gray-300 cursor-pointer relative my-5 mx-2  rounded-md overflow-hidden flex-grow 
+        @apply min-w-[150px] max-w-[150px] h-[200px] lg:min-w-[200px] lg:min-h-[300px] lg:max-w-[200px]  bg-gray-300 cursor-pointer relative my-5 mx-2  rounded-md overflow-hidden flex-grow 
         after:absolute after:w-full after:h-full after:top-0 after:bg-gradient-to-t after:from-transparent after:to-transparent 
         shrink-0
         /* max-width: 200px; */
@@ -47,14 +50,14 @@
         @apply absolute flex flex-col bottom-2 right-3 items-end 
     }
     .searchResultArticle{
-        @apply relative border-solid border-gray-800 border-2 bg-darkblue2 rounded-lg overflow-hidden  flex flex-row basis-44 w-11/12 mb-3 after:absolute after:w-full after:h-full  after:top-0 lg:basis-96 after:bg-gradient-to-t after:from-transparent after:to-transparent lg:mx-4 h-44;
+        @apply relative border-solid mx-auto border-gray-800 border-2 basis-11/12 bg-darkblue2 rounded-lg overflow-hidden flex flex-row  mb-3 after:absolute after:w-full after:h-full  after:top-0 lg:basis-96 after:bg-gradient-to-t after:from-transparent after:to-transparent lg:mx-4 h-44;
         max-width: 500px;
     }
     #searchInput{
         @apply  focus:outline-gray-700 outline-1 focus:bg-slate-600 focus:bg-opacity-20 text-gray-200 font-montserrat
     }
     .searchInputView{
-        @apply lg:!relative lg:!mx-auto lg:!left-0
+        @apply lg:!relative lg:!mx-auto lg:!left-0 top-24 max-w-lg
     }
     .imgResultContainer{
         @apply w-2/5 flex items-center h-full bg-black;

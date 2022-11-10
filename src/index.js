@@ -110,7 +110,7 @@ function render2(movieList, categories){
         img.classList.add('imgResult')
         genres.classList.add('searchResultSubtitle')
         description.classList.add('descriptionResultContainer')
-        titulo.classList.add('tituloRandomMovie')
+        titulo.classList.add('tituloSearchedMovie')
         titulo.classList.add('text-left')
         features.classList.add('featuresOfResult')
         imbdButton.classList.add('spanSquare')
