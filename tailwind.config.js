@@ -13,6 +13,9 @@ module.exports = {
       },
       spacing: {
         '500': '30rem',
+      },
+      animation: {
+        'bounce-once': 'spin .5s linear 1',
       }
     },
     plugins: [

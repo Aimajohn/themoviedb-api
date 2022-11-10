@@ -26,7 +26,11 @@ const scrollToLeft = document.getElementById('scrollToLeft')
 const scrollToRight = document.getElementById('scrollToRight')
 const scrollToLeftS = document.getElementById('scrollToLeftS')
 const scrollToRightS = document.getElementById('scrollToRightS')
+const scrollToLeftL = document.getElementById('scrollToLeftL')
+const scrollToRightL = document.getElementById('scrollToRightL')
 const categoriesTitle = document.getElementById('categoriesTitle')
 const heroPresentation = document.getElementById('heroPresentation')
+const likedMoviesContainer = document.getElementById('likedMoviesContainer')
+const mainDiv = document.querySelector('main')
 
 

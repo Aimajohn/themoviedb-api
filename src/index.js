@@ -6,7 +6,8 @@ let maxPage;
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3',
     params:{
-        api_key: '41f595b6e9a3306dcd645e1eab82f413'
+        api_key: '41f595b6e9a3306dcd645e1eab82f413',
+        language: navigator.language
     }
 })
 
@@ -34,12 +35,14 @@ function redondear(numero){
 function render(movieList, lazy=false){
     const moviesRendered = []
     movieList.forEach(movie => {
+        movie = (typeof(movie) == 'string')? JSON.parse(movie): movie
         const movieContainer = document.createElement('article');
         const imgRandomMovieContainer = document.createElement('div');
         const movieImg = document.createElement('img');
         const movieHeader = document.createElement('div');
         const tituloRandomMovie = document.createElement('h5');
         const imbdSpan = document.createElement('span');
+        const favButton = document.createElement('div')
         
         movieContainer.classList.add('movieContainer')
         imgRandomMovieContainer.classList.add('imgRandomMovieContainer')
@@ -47,12 +50,15 @@ function render(movieList, lazy=false){
         tituloRandomMovie.classList.add('tituloRandomMovie')
         imbdSpan.classList.add('imbdSpan')
         imbdSpan.classList.add('spanSquare')
-
-        movieImg.classList.add('movieImg')
+        favButton.classList.add('favButton')
+        
+        favButton.innerText = (localStorage.getItem(movie.id))?'❤️':'🖤'
         imgRandomMovieContainer.append(movieImg)
         movieHeader.append(tituloRandomMovie,imbdSpan)
         movieContainer.append(imgRandomMovieContainer, movieHeader)
+        movieContainer.append(favButton)
         movieContainer.dataset.id = movie.id
+        movieImg.setAttribute('alt', `${movie.title} poster`)
         movieImg.setAttribute( lazy?'data-src':'src', 'https://image.tmdb.org/t/p/w342' + movie.poster_path)
         // movieImg.setAttribute('loading', 'lazy')
         if(lazy){
@@ -61,6 +67,24 @@ function render(movieList, lazy=false){
         tituloRandomMovie.textContent = movie.title
         imbdSpan.textContent = redondear(movie.vote_average)
         moviesRendered.push(movieContainer)
+        favButton.addEventListener('click',()=>{
+            if(localStorage.getItem(movie.id)){
+                favButton.textContent = '🖤'
+                localStorage.removeItem(movie.id)
+
+            }else{
+                favButton.textContent = '❤️'
+                localStorage.setItem(movie.id, JSON.stringify(movie))
+            }
+            if(localStorage.length){
+                scrollToRightL.classList.remove('hidden')
+                getLikedMovies()
+            }else{
+                scrollToRightL.classList.add('hidden')
+                likedMoviesContainer.innerHTML = ' <article class="noLove"><p class="my-auto"> No tienes peliculas favoritas :(<br>Regala corazoncitos 💕 </p></article>'
+            }
+
+        } , true)
     })
     return moviesRendered
 }
@@ -195,7 +219,6 @@ async function getTrendings(){
     trendingMoviesContainer.innerHTML = ''
     trendingMoviesContainer.append(...movieList)
     trendingMoviesContainer.addEventListener('click', (event)=>{
-        console.log(event.target)
         if(event.target.dataset.id){
             location.hash = '#movie='+event.target.dataset.id
         }
@@ -272,12 +295,23 @@ async function getSimilarmovies(query){
     const movieList = render(data.results)
     similarMoviesContainer.append(...movieList)
     similarMoviesContainer.addEventListener('click', (event)=>{
-        console.log('hola')
         if(event.target.dataset.id){
             location.hash = '#movie='+event.target.dataset.id
         }
     }, true)
 }
+function getLikedMovies(){
+    likedMoviesContainer.innerHTML = ''
+    const movieList = render(Object.values(localStorage))
+    likedMoviesContainer.append(...movieList)
+    likedMoviesContainer.addEventListener('click', (event)=>{
+        if(event.target.dataset.id){
+            location.hash = '#movie='+event.target.dataset.id
+        }
+    }, true)
+}
+
+
 
 function searchMovie(){
     if(searchInput.value.length < 3){
@@ -286,5 +320,5 @@ function searchMovie(){
         location.hash = '#search=' + (searchInput.value.trim().split(' ')).join('&')
     }
 }
-
+console.log(navigator.language)
 

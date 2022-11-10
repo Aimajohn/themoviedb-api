@@ -11,6 +11,7 @@ function removeHidden(elementos){
 let infinitiveScroll;
 
 function navigator(){
+    mainDiv.classList.add('mt-20')
     if(infinitiveScroll){
         window.removeEventListener('scroll', infinitiveScroll)
         infinitiveScroll = undefined
@@ -90,7 +91,7 @@ async function loadCategoryChunk(id){
 
 function trendsPage(){
     const toRemove = [backButton, trendingSectionTitle, ]
-    const toAdd = [movieDescription, heroPoster, moviesByCategory, categoriesTitle, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, similarSection, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
+    const toAdd = [likedSection, movieDescription, heroPoster, moviesByCategory, categoriesTitle, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, similarSection, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
     // trendingSection.classList.add('pt-20')
     addHidden(toAdd)
     removeHidden(toRemove)
@@ -102,9 +103,10 @@ function trendsPage(){
 
 async function homePage(){
     const toAdd = [backButton,movieDescription,searchPageTitle,searchResultsSection, moviesByCategory]
-    const toRemove = [searchInputContainer, verMasSimilar, categorySection,pageLogo,heroPoster,trendingSection,categorySection, verMasTrends, trendingMoviesContainer, similarSection, trendingSectionTitle, categoriesTitle, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS ]
+    const toRemove = [searchInputContainer, verMasSimilar, categorySection,pageLogo,heroPoster,trendingSection,categorySection, verMasTrends, trendingMoviesContainer, similarSection, trendingSectionTitle, categoriesTitle, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS, likedSection]
     addHidden(toAdd)
     removeHidden(toRemove)
+    mainDiv.classList.remove('mt-20')
     trendingSectionTitle.classList.remove('mt-20')
     trendingMoviesContainer.classList.remove('flex-wrap')
     trendingMoviesContainer.classList.remove('justify-evenly')
@@ -125,16 +127,22 @@ async function homePage(){
     heroPresentation.classList.remove('lg:hidden')
     searchInputContainer.classList.remove('searchInputView')
 
-
     getCategoryList()
     await getTrendings()
     getHero(heroPoster.dataset.id, window.innerWidth)
     getSimilarmovies(heroPoster.dataset.id)
+    if(localStorage.length){
+        scrollToRightL.classList.remove('hidden')
+        getLikedMovies()
+    }else{
+        scrollToRightL.classList.add('hidden')
+        likedMoviesContainer.innerHTML = ' <article class="noLove"><p class="my-auto"> No tienes peliculas favoritas :(<br>Regala corazoncitos 💖 </p></article>'
+    }
 }
 
 function similarPage(query){
     const toRemove = [backButton , similarSection, ]
-    const toAdd = [movieDescription, heroPoster, pageLogo, verMasSimilar, categoriesTitle, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingSectionTitle, trendingSection, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
+    const toAdd = [likedSection, movieDescription, heroPoster, pageLogo, verMasSimilar, categoriesTitle, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingSectionTitle, trendingSection, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
     // similarSectionTitle.classList.add('mt-20')
     addHidden(toAdd)
     removeHidden(toRemove)
@@ -146,7 +154,7 @@ function similarPage(query){
 
 function categoryPage([categoryName, categoryId]){
     const toRemove = [backButton, trendingSectionTitle, moviesByCategory]
-    const toAdd = [movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingMoviesContainer, similarSection, categoriesTitle, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
+    const toAdd = [likedSection, movieDescription, heroPoster, pageLogo, categorySection, searchResultsSection, searchInputContainer, searchInputContainer, searchPageTitle, verMasTrends, trendingMoviesContainer, similarSection, categoriesTitle, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
     addHidden(toAdd)
     removeHidden(toRemove)
     moviesByCategory.classList.add('sm:w-[98%]')
@@ -157,7 +165,7 @@ function categoryPage([categoryName, categoryId]){
 }
 
 function moviePage(query){
-    const toAdd = [searchInputContainer, categorySection, categoriesTitle,heroPresentation, searchPageTitle, searchResultsSection, trendingMoviesContainer, trendingSection, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
+    const toAdd = [likedSection, searchInputContainer, categorySection, categoriesTitle,heroPresentation, searchPageTitle, searchResultsSection, trendingMoviesContainer, trendingSection, scrollToLeft, scrollToLeftS, scrollToRight, scrollToRightS]
     const toRemove = [movieDescription, backButton, heroPoster, pageLogo, similarSection]
     addHidden(toAdd)
     removeHidden(toRemove)
@@ -177,14 +185,19 @@ searchButton.addEventListener('click', searchMovie)
 searchInput.addEventListener('keydown', (event)=>(event.key == 'Enter')?searchMovie() :null)
 verMasSimilar.addEventListener('click', ()=>location.hash = `#similarMovies=${heroPoster.dataset.id}`)
 verSimilaresPoster.addEventListener('click', ()=>location.hash = `#similarMovies=${heroPoster.dataset.id}`)
-scrollToRight.addEventListener('click', ()=>trendingMoviesContainer.scrollLeft+=500)
-scrollToLeft.addEventListener('click', ()=>trendingMoviesContainer.scrollLeft-=500)
-scrollToRightS.addEventListener('click', ()=>similarMoviesContainer.scrollLeft+=500)
-scrollToLeftS.addEventListener('click', ()=>similarMoviesContainer.scrollLeft-=500)
+
 backButton.addEventListener('click', ()=>{
     window.scrollTo(0,0)
     location.hash = window.history.back()
 })
+
+let flechas = [[scrollToLeft, scrollToRight, trendingMoviesContainer], [scrollToLeftS, scrollToRightS, similarMoviesContainer], [scrollToLeftL, scrollToRightL, likedMoviesContainer]]
+
+flechas.forEach(([flechaL,flechaR, container ]) =>{
+    flechaL.addEventListener('click', ()=>container.scrollLeft-=500)
+    flechaR.addEventListener('click', ()=>container.scrollLeft+=500)
+})
+
 similarMoviesContainer.addEventListener('scroll',()=>{
     if(similarMoviesContainer.scrollLeft > 0){
         scrollToLeftS.classList.add('block')
@@ -193,10 +206,17 @@ similarMoviesContainer.addEventListener('scroll',()=>{
     }
 })
 trendingMoviesContainer.addEventListener('scroll',()=>{
-    console.log(trendingMoviesContainer.scrollLeft)
     if(trendingMoviesContainer.scrollLeft > 0){
         scrollToLeft.classList.add('block')
     }else{
         scrollToLeft.classList.remove('block')
     }
 })
+likedMoviesContainer.addEventListener('scroll',()=>{
+    if(likedMoviesContainer.scrollLeft > 0){
+        scrollToLeftL.classList.add('block')
+    }else{
+        scrollToLeftL.classList.remove('block')
+    }
+})
+

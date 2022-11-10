@@ -4,11 +4,12 @@
 
 @layer base {}
 @layer components {
+
     .btn-blue {
         @apply ;
     }
     .categoryButton {
-        @apply w-36 h-12 md:w-52  md:h-24 rounded-lg text-gray-300 bg-darkblue2 flex items-center  cursor-pointer m-3 border-solid border-2 border-gray-800 hover:bg-gray-800;
+        @apply basis-[45%] h-12   md:h-24 rounded-lg text-gray-300 bg-darkblue2 flex items-center  cursor-pointer my-3 mx-[2.5%] md:basis-[30%] md:mx-[1.5%] lg:basis-[22%] lg:mx-[1.2%] border-solid border-2 border-gray-800 hover:bg-gray-800;
     }
     .buttonTitle{
         @apply font-medium font-poppins text-xs md:text-lg leading-5
@@ -22,14 +23,18 @@
     .tituloRandomMovie{
         @apply hidden sm:block bottom-0 text-gray-200 font-poppins font-semibold text-xl text-right leading-5 
     }
+    
     .imgRandomMovieContainer{
-        @apply  relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95;
+        @apply h-full  relative before:absolute before:w-full before:h-1/2 before:top-1/2 before:bg-gradient-to-b before:from-transparent before:to-black before:opacity-95;
     }
     .movieContainer{
         @apply h-[144px] w-[96px] sm:min-w-[150px] sm:min-h-[200px] lg:min-w-[200px] lg:min-h-[300px] lg:max-w-[250px]  bg-gray-300 cursor-pointer relative my-5 mx-2  rounded-md overflow-hidden flex-grow 
         after:absolute after:w-full after:h-full after:top-0 after:bg-gradient-to-t after:from-transparent after:to-transparent 
         shrink-0
         /* max-width: 200px; */
+    }
+    .favButton{
+        @apply absolute top-2 sm:pt-0 right-2 bg-gray-200 text-red-600 w-8 h-8 sm:w-10 sm:h-10 text-xl sm:text-2xl sm:leading-10 pt-1 text-center rounded-full z-30 
     }
     .spanSquare{
         @apply h-7 mr-1 mt-1 px-2 py-1 rounded-md text-sm font-poppins font-normal bg-gray-800 text-gray-300
@@ -82,7 +87,10 @@
         @apply hidden absolute bottom-0 left-0 h-5/6 w-20 bg-gradient-to-l from-transparent to-darkblue;
     }
     .buttonMoveRight{
-        @apply  absolute bottom-0 h-5/6 right-0 w-20 bg-gradient-to-r from-transparent to-darkblue;
+        @apply hidden sm:block absolute bottom-0 h-5/6 right-0 w-20 bg-gradient-to-r from-transparent to-darkblue;
+    }
+    .noLove{
+        @apply h-[144px] sm:min-h-[200px] text-xl  lg:min-h-[300px] w-full bg-darkblue2 rounded-md md:text-3xl font-thin font-montserrat justify-center text-center sm:leading-[200px] mx-auto shadow-lg leading-10 flex items-center
     }
     
 }
