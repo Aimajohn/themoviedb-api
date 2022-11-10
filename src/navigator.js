@@ -183,7 +183,13 @@ function moviePage(query){
 // addEventListeners 
 
 searchButton.addEventListener('click', searchMovie)
-searchInput.addEventListener('keydown', (event)=>(event.key == 'Enter')?searchMovie() :null)
+searchInput.addEventListener('keydown', event=>{
+    if(event.key == 'Enter'){
+        searchMovie() 
+        searchInput.blur()
+    }
+    }
+)
 verMasSimilar.addEventListener('click', ()=>location.hash = `#similarMovies=${heroPoster.dataset.id}`)
 verSimilaresPoster.addEventListener('click', ()=>location.hash = `#similarMovies=${heroPoster.dataset.id}`)
 

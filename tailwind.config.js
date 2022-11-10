@@ -16,13 +16,16 @@ module.exports = {
       },
       animation: {
         'bounce-once': 'spin .5s linear 1',
+      },
+      backgroundImage: {
+        'heart': "url('../../src/css/img.png')",
       }
     },
     plugins: [
       require('cssnano')({
         preset: 'default',
-      }),
+    }),
     ],
-    purge: ["./src/**/*.{js,jsx,ts,tsx,}", "./public/*.html"],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/*.html"],
   }
 }
