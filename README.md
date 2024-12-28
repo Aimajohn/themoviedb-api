@@ -1,6 +1,6 @@
 # The moovies.
 Hecha un vistazo por ti mismo
-Entra a [**The moovies**.](https://aimajoke.github.io/themoviedb-api/public/)
+Entra a [**The moovies**.](https://aimajohn.github.io/themoviedb-api/public/)
 
 A website to use themoviedb api and find your favorites movies.
 ![enter image description here](https://i.postimg.cc/hPppy5WN/aimajoke-github-io-themoviedb-api-public-1.png)
